@@ -1,0 +1,25 @@
+{
+    'name': 'Centro Sanitario - Psicología',
+    'version': '1.0.0',
+    'category': 'Healthcare',
+    'summary': 'Módulo para gestión de sesiones psicológicas, evaluaciones y llamadas familiares',
+    'author': 'Equilibrium Dev Team',
+    'license': 'LGPL-3',
+    'depends': [
+        'base',
+        'mail',
+        'calendar',
+        'cs_resident',
+    ],
+    'data': [
+        'security/ir.model.access.csv',
+        'security/record_rules.xml',
+        'data/ir_sequence.xml',
+        'views/cs_psychology_session_views.xml',
+        'views/cs_initial_assessment_views.xml',
+        'views/cs_family_call_views.xml',
+    ],
+    'installable': True,
+    'application': False,
+    'auto_install': False,
+}

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cs_psychology_session_all,cs.psychology.session - Acceso Total,model_cs_psychology_session,base.group_user,1,1,1,0
+access_cs_initial_assessment_all,cs.initial.assessment - Acceso Total,model_cs_initial_assessment,base.group_user,1,1,1,0
+access_cs_family_call_all,cs.family.call - Acceso Total,model_cs_family_call,base.group_user,1,1,1,0
