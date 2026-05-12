@@ -68,6 +68,12 @@ class FamilyCall(models.Model):
         default=lambda self: self.env.company,
     )
 
+    attachment_ids = fields.Many2many(
+        "ir.attachment",
+        string="Documentos e imágenes",
+        help="PDF, notas escaneadas, capturas de pantalla u otros archivos del contacto.",
+    )
+
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:

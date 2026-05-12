@@ -79,6 +79,12 @@ class PsychologySession(models.Model):
         default=lambda self: self.env.company,
     )
 
+    attachment_ids = fields.Many2many(
+        "ir.attachment",
+        string="Documentos e imágenes",
+        help="PDF, informes escaneados, imágenes u otros archivos vinculados a la sesión.",
+    )
+
     def action_mark_done(self):
         self.write({"state": "done"})
 

@@ -55,6 +55,9 @@
                         <group string="Recomendaciones">
                             <field name="recommendations" nolabel="1" colspan="2"/>
                         </group>
+                        <group string="Archivos adjuntos (PDF, imágenes, etc.)">
+                            <field name="attachment_ids" nolabel="1" colspan="2" widget="many2many_binary"/>
+                        </group>
                     </sheet>
                     <chatter/>
                 </form>

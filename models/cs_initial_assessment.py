@@ -67,6 +67,12 @@ class InitialPsychAssessment(models.Model):
         default=lambda self: self.env.company,
     )
 
+    attachment_ids = fields.Many2many(
+        "ir.attachment",
+        string="Documentos e imágenes",
+        help="PDF, informes, capturas u otros archivos vinculados a la evaluación.",
+    )
+
     def action_mark_done(self):
         self.write({"state": "done"})
 

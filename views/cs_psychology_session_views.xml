@@ -50,6 +50,9 @@
                             <field name="summary" nolabel="1" colspan="2" placeholder="Objetivos o resumen breve..."/>
                             <field name="notes" nolabel="1" colspan="2" placeholder="Notas clínicas..."/>
                         </group>
+                        <group string="Archivos adjuntos (PDF, imágenes, etc.)">
+                            <field name="attachment_ids" nolabel="1" colspan="2" widget="many2many_binary"/>
+                        </group>
                     </sheet>
                     <chatter/>
                 </form>
