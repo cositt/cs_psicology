@@ -8,8 +8,8 @@
     'depends': [
         'base',
         'mail',
-        'calendar',
         'cs_resident',
+        'cs_patient_followup_forms',
     ],
     'data': [
         'security/ir.model.access.csv',
@@ -18,6 +18,7 @@
         'views/cs_psychology_session_views.xml',
         'views/cs_initial_assessment_views.xml',
         'views/cs_family_call_views.xml',
+        'views/menu_views.xml',
     ],
     'installable': True,
     'application': False,

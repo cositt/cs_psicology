@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_cs_psychology_root"
+                  name="Psicología"
+                  sequence="35"
+                  web_icon="cs_psychology,static/description/icon.png"/>
+        <menuitem id="menu_cs_psychology_session"
+                  name="Sesiones"
+                  parent="menu_cs_psychology_root"
+                  action="cs_psychology_session_action"
+                  sequence="10"/>
+        <menuitem id="menu_cs_initial_assessment"
+                  name="Evaluación inicial"
+                  parent="menu_cs_psychology_root"
+                  action="cs_initial_assessment_action"
+                  sequence="20"/>
+        <menuitem id="menu_cs_family_call"
+                  name="Contactos familia"
+                  parent="menu_cs_psychology_root"
+                  action="cs_family_call_action"
+                  sequence="30"/>
+    </data>
+</odoo>

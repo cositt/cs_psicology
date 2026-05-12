@@ -1,6 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <!-- Views for cs.initial.assessment will be added here -->
+        <record id="cs_initial_assessment_view_list" model="ir.ui.view">
+            <field name="name">cs.initial.assessment.list</field>
+            <field name="model">cs.initial.assessment</field>
+            <field name="arch" type="xml">
+                <list string="Evaluaciones iniciales">
+                    <field name="name"/>
+                    <field name="assessment_date"/>
+                    <field name="resident_id"/>
+                    <field name="psychologist_id"/>
+                    <field name="state"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="cs_initial_assessment_view_form" model="ir.ui.view">
+            <field name="name">cs.initial.assessment.form</field>
+            <field name="model">cs.initial.assessment</field>
+            <field name="arch" type="xml">
+                <form string="Evaluación psicológica inicial">
+                    <header>
+                        <button name="action_mark_done" string="Cerrar evaluación" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                        <button name="action_set_draft" string="Volver a borrador" type="object" invisible="state != 'done'"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="name" readonly="1"/></h1>
+                        </div>
+                        <group>
+                            <group string="General">
+                                <field name="resident_id"/>
+                                <field name="partner_id"/>
+                                <field name="psychologist_id"/>
+                                <field name="assessment_date"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                            <group string="Formulario">
+                                <field name="assessment_template_id"/>
+                                <field name="assessment_id" domain="[('patient_id', '=', partner_id)]"/>
+                            </group>
+                        </group>
+                        <group string="Motivo y antecedentes">
+                            <field name="reason_for_referral" nolabel="1" colspan="2"/>
+                        </group>
+                        <group string="Antecedentes">
+                            <field name="background_summary" nolabel="1" colspan="2"/>
+                        </group>
+                        <group string="Impresión clínica">
+                            <field name="initial_hypothesis" nolabel="1" colspan="2"/>
+                            <field name="risk_notes" nolabel="1" colspan="2"/>
+                        </group>
+                        <group string="Recomendaciones">
+                            <field name="recommendations" nolabel="1" colspan="2"/>
+                        </group>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="cs_initial_assessment_view_search" model="ir.ui.view">
+            <field name="name">cs.initial.assessment.search</field>
+            <field name="model">cs.initial.assessment</field>
+            <field name="arch" type="xml">
+                <search string="Evaluaciones iniciales">
+                    <field name="name"/>
+                    <field name="resident_id"/>
+                    <separator/>
+                    <filter name="draft" string="Borrador" domain="[('state', '=', 'draft')]"/>
+                    <filter name="done" string="Cerradas" domain="[('state', '=', 'done')]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="cs_initial_assessment_action" model="ir.actions.act_window">
+            <field name="name">Evaluaciones iniciales</field>
+            <field name="res_model">cs.initial.assessment</field>
+            <field name="view_mode">list,form</field>
+        </record>
     </data>
 </odoo>
