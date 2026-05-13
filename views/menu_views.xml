@@ -5,6 +5,11 @@
                   name="Psicología"
                   sequence="35"
                   web_icon="cs_psychology,static/description/icon.png"/>
+        <menuitem id="menu_cs_psychology_calendar"
+                  name="Citas (calendario)"
+                  parent="menu_cs_psychology_root"
+                  action="cs_psychology_calendar_action"
+                  sequence="5"/>
         <menuitem id="menu_cs_psychology_session"
                   name="Sesiones"
                   parent="menu_cs_psychology_root"
