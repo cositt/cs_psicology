@@ -79,6 +79,17 @@ class InitialPsychAssessment(models.Model):
     def action_set_draft(self):
         self.write({"state": "draft"})
 
+    @api.onchange('assessment_template_id')
+    def _onchange_assessment_template_id(self):
+        if self.assessment_template_id and not self.assessment_id:
+            assessment = self.env['cs.followup.assessment'].create({
+                'template_id': self.assessment_template_id.id,
+                'patient_id': self.partner_id.id,
+                'clinician_id': self.env.user.id,
+                'assessment_date': self.assessment_date or fields.Date.context_today(self),
+            })
+            self.assessment_id = assessment.id
+
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
@@ -86,4 +97,8 @@ class InitialPsychAssessment(models.Model):
                 vals["name"] = (
                     self.env["ir.sequence"].next_by_code("cs.initial.assessment") or _("Nueva evaluación")
                 )
-        return super().create(vals_list)
+        records = super().create(vals_list)
+        admission_id = self.env.context.get('default_admission_id')
+        if admission_id and records:
+            self.env['cs.admission.process'].browse(admission_id).initial_assessment_id = records[0]
+        return records

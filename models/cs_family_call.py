@@ -28,7 +28,20 @@ class FamilyCall(models.Model):
         default=fields.Datetime.now,
         tracking=True,
     )
-    contacted_name = fields.Char(string="Persona contactada", required=True)
+    family_partner_id = fields.Many2one(
+        "res.partner",
+        string="Familiar vinculado",
+        domain="[('parent_id', '=', partner_id)]",
+        tracking=True,
+        help="Seleccione un familiar ya vinculado al residente o deje vacío para escribir el nombre manualmente.",
+    )
+    contacted_name = fields.Char(
+        string="Persona contactada",
+        compute="_compute_contacted_name",
+        store=True,
+        readonly=False,
+        required=True,
+    )
     relationship = fields.Char(string="Relación con el residente")
     duration_minutes = fields.Integer(string="Duración (min)")
     channel = fields.Selection(
@@ -73,6 +86,12 @@ class FamilyCall(models.Model):
         string="Documentos e imágenes",
         help="PDF, notas escaneadas, capturas de pantalla u otros archivos del contacto.",
     )
+
+    @api.depends("family_partner_id")
+    def _compute_contacted_name(self):
+        for rec in self:
+            if rec.family_partner_id and not rec.contacted_name:
+                rec.contacted_name = rec.family_partner_id.name
 
     @api.model_create_multi
     def create(self, vals_list):

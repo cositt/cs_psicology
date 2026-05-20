@@ -20,6 +20,7 @@
         'views/cs_psychology_session_views.xml',
         'views/cs_initial_assessment_views.xml',
         'views/cs_family_call_views.xml',
+        'views/resident_psychology_views.xml',
         'views/menu_views.xml',
     ],
     'installable': True,
