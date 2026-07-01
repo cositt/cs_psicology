@@ -10,7 +10,7 @@
         'mail',
         'calendar',
         'cs_resident',
-        'cs_patient_followup_forms',
+        'cs_patient_followup',
     ],
     'data': [
         'security/ir.model.access.csv',

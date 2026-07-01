@@ -4,7 +4,7 @@
         <menuitem id="menu_cs_psychology_root"
                   name="Psicología"
                   sequence="35"
-                  web_icon="cs_psychology,static/description/icon.png"/>
+                  web_icon="cs_psicology,static/description/icon.png"/>
         <menuitem id="menu_cs_psychology_calendar"
                   name="Citas (calendario)"
                   parent="menu_cs_psychology_root"
