@@ -4,7 +4,7 @@ from odoo import _, api, fields, models
 class FamilyCall(models.Model):
     _name = "cs.family.call"
     _description = "Llamada / contacto con familia"
-    _inherit = ["mail.thread", "mail.activity.mixin"]
+    _inherit = ["mail.thread", "mail.activity.mixin", "cs.family.relationship.mixin"]
     _order = "call_datetime desc, id desc"
 
     name = fields.Char(string="Referencia", required=True, copy=False, default=lambda self: _("Nuevo contacto"))
