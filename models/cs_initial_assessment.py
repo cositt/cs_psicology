@@ -93,7 +93,7 @@ class InitialPsychAssessment(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            if vals.get("name") in (False, _("Nueva evaluación")):
+            if not vals.get("name") or vals["name"] == _("Nueva evaluación"):
                 vals["name"] = (
                     self.env["ir.sequence"].next_by_code("cs.initial.assessment") or _("Nueva evaluación")
                 )

@@ -17,12 +17,12 @@ class ResidentPsychologyExtend(models.Model):
     )
 
     def _compute_psychology_session_count(self):
-        groups = self.env['cs.psychology.session'].read_group(
+        groups = self.env['cs.psychology.session']._read_group(
             domain=[('resident_id', 'in', self.ids)],
-            fields=['resident_id'],
             groupby=['resident_id'],
+            aggregates=['__count'],
         )
-        counts = {g['resident_id'][0]: g['resident_id_count'] for g in groups}
+        counts = {resident.id: count for resident, count in groups}
         for rec in self:
             rec.psychology_session_count = counts.get(rec.id, 0)
 
