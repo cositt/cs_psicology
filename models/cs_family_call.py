@@ -96,6 +96,6 @@ class FamilyCall(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            if vals.get("name") in (False, _("Nuevo contacto")):
+            if not vals.get("name") or vals["name"] == _("Nuevo contacto"):
                 vals["name"] = self.env["ir.sequence"].next_by_code("cs.family.call") or _("Nuevo contacto")
         return super().create(vals_list)
