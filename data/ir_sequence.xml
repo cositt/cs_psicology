@@ -7,6 +7,7 @@
             <field name="prefix">PSY/SES/</field>
             <field name="padding">5</field>
             <field name="implementation">standard</field>
+            <field name="company_id" eval="False"/>
         </record>
         <record id="sequence_cs_initial_assessment" model="ir.sequence">
             <field name="name">Evaluación inicial psicología</field>
@@ -14,6 +15,7 @@
             <field name="prefix">PSY/INI/</field>
             <field name="padding">5</field>
             <field name="implementation">standard</field>
+            <field name="company_id" eval="False"/>
         </record>
         <record id="sequence_cs_family_call" model="ir.sequence">
             <field name="name">Contactos familia</field>
@@ -21,6 +23,7 @@
             <field name="prefix">PSY/FAM/</field>
             <field name="padding">5</field>
             <field name="implementation">standard</field>
+            <field name="company_id" eval="False"/>
         </record>
     </data>
 </odoo>

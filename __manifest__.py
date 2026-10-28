@@ -1,6 +1,6 @@
 {
     'name': 'Centro Sanitario - Psicología',
-    'version': '1.1.0',
+    'version': '1.1.1',
     'category': 'Healthcare',
     'summary': 'Módulo para gestión de sesiones psicológicas, evaluaciones y llamadas familiares',
     'author': 'Equilibrium Dev Team',
