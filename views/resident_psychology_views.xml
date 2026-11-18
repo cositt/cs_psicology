@@ -16,6 +16,7 @@
                 </xpath>
                 <xpath expr="//group[@name='resident_notes_group']" position="after">
                     <group string="Psicología — Llamadas y contactos familiares">
+                        <field name="therapist_user_id" options="{'no_create': True}"/>
                         <field name="family_call_ids" nolabel="1">
                             <list string="Llamadas familiares" editable="bottom">
                                 <field name="call_datetime"/>

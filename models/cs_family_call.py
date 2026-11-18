@@ -98,4 +98,43 @@ class FamilyCall(models.Model):
         for vals in vals_list:
             if not vals.get("name") or vals["name"] == _("Nuevo contacto"):
                 vals["name"] = self.env["ir.sequence"].next_by_code("cs.family.call") or _("Nuevo contacto")
-        return super().create(vals_list)
+        calls = super().create(vals_list)
+        calls._notify_therapist()
+        return calls
+
+    def _therapist_recipients(self):
+        """Reference therapist of the resident, or the psychology group as fallback."""
+        self.ensure_one()
+        therapist = self.resident_id.therapist_user_id
+        if therapist:
+            return therapist
+        group = self.env.ref("cs_piai.group_cs_psychology", raise_if_not_found=False)
+        if not group:
+            return self.env["res.users"]
+        return group.sudo().user_ids.filtered(lambda u: u.active and not u.share)
+
+    def _notify_therapist(self):
+        """Ronda Salud: every family call creates a to-do for the resident's therapist."""
+        for call in self:
+            recipients = call._therapist_recipients()
+            if not recipients:
+                call.message_post(
+                    body=_(
+                        "No se ha avisado a ningún terapeuta: el residente no tiene "
+                        "«Terapeuta de referencia» y no hay usuarios en «PIAI - Psicología»."
+                    ),
+                    subtype_xmlid="mail.mt_note",
+                )
+                continue
+            summary = _(
+                "Llamada de %(who)s sobre %(resident)s",
+                who=call.contacted_name or _("un familiar"),
+                resident=call.resident_id.name,
+            )
+            for user in recipients - self.env.user:
+                call.sudo().activity_schedule(
+                    "mail.mail_activity_data_todo",
+                    user_id=user.id,
+                    summary=summary,
+                    note=call.notes or False,
+                )

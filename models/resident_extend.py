@@ -5,6 +5,15 @@ from odoo import _, api, fields, models
 class ResidentPsychologyExtend(models.Model):
     _inherit = 'cs.resident'
 
+    therapist_user_id = fields.Many2one(
+        'res.users',
+        string='Terapeuta de referencia',
+        tracking=True,
+        domain=[('share', '=', False)],
+        help='Recibe una actividad cada vez que se registra una llamada o contacto de la familia. '
+             'Si se deja vacío, el aviso va a los usuarios del grupo «PIAI - Psicología».',
+    )
+
     family_call_ids = fields.One2many(
         'cs.family.call',
         'resident_id',
